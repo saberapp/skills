@@ -8,7 +8,7 @@ Arsenal is Saber's open-source GTM and RevOps skills library for Claude Code, in
 
 ```
 /plugins add-marketplace saberapp/arsenal-marketplace
-/plugins install arsenal
+/plugins install saber-arsenal
 ```
 
 ### Direct URL install (contributors and testers)
