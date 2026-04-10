@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.2.0] - 2026-04-10
+
+### Added
+
+- `saber-signal-discovery` skill — define buying signals matching your ICP
+- `saber-create-company-signals` skill — activate company-level signal tracking via the Saber CLI
+- `saber-create-contact-signals` skill — activate contact-level signal tracking via the Saber CLI
+- `saber-build-account-list` skill — build target account lists and run company signals
+- `saber-build-contact-list` skill — build target contact lists and run contact signals
+
+### Removed
+
+- `hello-world` placeholder skill (replaced by real skills)
+
 ## [0.1.0] - 2026-04-10
 
 ### Added
