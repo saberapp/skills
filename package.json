@@ -1,6 +1,6 @@
 {
   "name": "saber-arsenal",
-  "version": "0.2.0",
+  "version": "0.1.0",
   "description": "Saber Arsenal — GTM and RevOps skills for Claude Code, powered by the Saber CLI",
   "type": "module",
   "license": "MIT",
