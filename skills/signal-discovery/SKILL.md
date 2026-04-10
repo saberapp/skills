@@ -1,83 +1,73 @@
 ---
 name: signal-discovery
 description: >
-  Define buying signals that match your ICP — start here before creating signals or building lists.
+  Guided entry point for defining your ICP and buying signals — runs extract-icp
+  then generate-signals in sequence. Start here before creating signals or building lists.
 ---
 
 # Signal Discovery
 
-Use this skill to help the user define what buying intent looks like for their Ideal Customer Profile (ICP) before activating signal tracking.
-
-## Goal
-
-Produce a clear ICP definition and a set of approved signal definitions in conversation context, ready to be activated — ideally via the Saber CLI, or documented for manual use if the CLI is not available.
+Use this skill as the starting point for signal-based prospecting. It loads your organisation
+context, then runs `extract-icp` and `generate-signals` in sequence to produce a complete,
+scored signal set ready to activate in Saber.
 
 ## Saber CLI check
 
-Before doing anything else, check if the Saber CLI is installed by running `saber --help`.
+Run `saber --help` to check if the Saber CLI is installed.
 
 **If the CLI is available:** proceed with the full workflow below.
 
-**If not installed:** inform the user that this skill works best with the Saber CLI (available at saber.app), then offer two options:
-1. **Install the CLI** — once installed, come back and restart this skill
-2. **Continue without the CLI** — skip the `saber org get` step and ask for org context manually; the rest of the skill (ICP definition and signal design) works fully without the CLI
+**If not installed:** inform the user that this skill works best with the Saber CLI
+(available at saber.app), then offer two options:
+1. **Install the CLI** — once installed, restart this skill
+2. **Continue without the CLI** — skip `saber org get` and ask for org context manually;
+   the ICP extraction and signal generation steps work fully without the CLI
 
-## Workflow
-
-### Step 1 — Load organisation context
+## Step 1 — Load organisation context
 
 **With CLI:** run `saber org get`
-- If the profile contains name, website, and description fields → use them directly, skip asking.
-- If the profile is empty or missing key fields → ask the user to fill in the gaps, then run
-  `saber org update --name "..." --general "..." --products "..." --use-cases "..." --value-prop "..."`
-  to persist the context for future sessions.
+- If the profile contains name, website, and description → use them directly, skip asking.
+- If the profile is empty or missing key fields → ask the user to fill in the gaps, then persist:
+  ```bash
+  saber org update --name "..." --general "..." --products "..." --use-cases "..." --value-prop "..."
+  ```
 
-**Without CLI:** ask the user directly:
+**Without CLI:** ask the user:
 - What does your company do?
 - Who do you sell to?
 - What problem do you solve?
 
-Do not ask questions that are already answered by available context.
+Do not ask questions already answered by available context (e.g. CLAUDE.md).
 
-Once org context is established, ask these ICP questions in order:
-1. **Who do you sell to?** (industry, company size, geography, buyer title) — required to define the ICP
-2. **Who is the buyer?** (title, seniority, department — e.g. "VP Sales", "Head of RevOps")
-3. **What makes a company ready to buy?** (triggers — e.g. new sales hire, funding round, tech migration)
+## Step 2 — Extract the ICP
 
-Keep this conversational — don't dump all questions at once.
+Use the `extract-icp` skill with the company's domain.
 
-### Step 2 — Generate signal hypotheses
+This produces a structured ICP covering: target company profile, buying committee,
+deal economics, pain points, buying triggers, and existing customers.
 
-Based on the ICP, propose 3–5 signals that indicate buying intent. For each signal:
-- **Signal question** — a natural-language question Saber will answer (e.g. "Is this company actively hiring SDRs?")
-- **Signal type** — `company` or `contact`
-- **Why it matters** — brief rationale linking the signal to purchase readiness
+Keep the ICP output in conversation context for the next step.
 
-### Step 3 — Confirm with user
+## Step 3 — Generate signals
 
-Present the proposed signals and ask for feedback. Adjust as needed.
+Use the `generate-signals` skill with the ICP from Step 2.
 
-### Step 4 — Hand off
+This produces 12–15 research signals across three categories:
+- `icp_fit` — does the company profile match?
+- `urgency` — did a recent trigger event happen?
+- `buying_signal` — is there evidence of the pain?
 
-Keep the agreed ICP and signal definitions in conversation context — do not write them to files.
+Each signal includes answer type, weight (1–3), disqualifier flag, and interpretation rules
+needed for automatic scoring.
 
-Once signals are approved, tell the user:
-- To build a target list first: use the `build-account-list` or `build-contact-list` skill
-- To activate company signals: use the `create-company-signals` skill
-- To activate contact signals: use the `create-contact-signals` skill
+Confirm the signal set with the user before handing off. Adjust any signals that don't fit.
 
-## Example signals
+## Step 4 — Hand off
 
-```
-Signal: Is this company actively hiring in sales or revenue roles?
-Type: company
-Rationale: Hiring in sales indicates growth mode and budget for new tools.
+Keep the agreed ICP and signal definitions in conversation context.
 
-Signal: Has this company recently raised a funding round?
-Type: company
-Rationale: Post-funding companies accelerate spend on GTM tooling.
-
-Signal: Is the Head of People at this company posting about frontline retention challenges?
-Type: contact
-Rationale: Public pain signals from the buyer persona indicate active problem awareness.
-```
+Once signals are approved, tell the user their next steps:
+- To build a target list: use `build-account-list` or `build-contact-list`
+- To activate company signals: use `create-company-signals`
+- To activate contact signals: use `create-contact-signals`
+- After signals run: use `score-accounts` to rank accounts using the weighted scoring model

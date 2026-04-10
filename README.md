@@ -21,7 +21,9 @@ Saber Arsenal is Saber's open-source GTM and RevOps skills library for Claude Co
 
 | Skill | Description | Requires Saber CLI |
 |---|---|---|
-| `signal-discovery` | Define buying signals that match your ICP — start here. | Optional |
+| `signal-discovery` | Guided entry point — runs `extract-icp` then `generate-signals` in sequence. Start here. | Optional |
+| `extract-icp` | Research a company domain and extract a structured ICP: target profile, pain points, buying triggers. | No |
+| `generate-signals` | Turn a structured ICP into 12–15 weighted research signals with scoring rules. | No |
 | `create-company-signals` | Activate company-level signal tracking. | Yes |
 | `create-contact-signals` | Activate contact-level signal tracking. | Yes |
 | `build-account-list` | Build a target account list and run company signals. | Yes |
