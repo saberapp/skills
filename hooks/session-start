@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
-echo "# Arsenal GTM Skills"
-echo "Arsenal is installed. Available skills: hello-world (placeholder)."
-echo "Use the Skill tool to invoke any Arsenal skill."
+echo "# Saber Arsenal"
+echo "Saber Arsenal is installed — GTM and RevOps skills for Claude Code, powered by the Saber CLI."
+echo "All skills use the Saber CLI (saber) for account intelligence, signal tracking, and prospecting."
+echo "Available skills: hello-world (placeholder)."
+echo "Use the Skill tool to invoke any Saber Arsenal skill."

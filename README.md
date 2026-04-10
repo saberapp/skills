@@ -1,6 +1,6 @@
-# Arsenal
+# Saber Arsenal
 
-Arsenal is Saber's open-source GTM and RevOps skills library for Claude Code, inspired by [obra/superpowers](https://github.com/obra/superpowers). It packages reusable sales and revenue intelligence skills that plug directly into Claude Code via the plugin system.
+Saber Arsenal is Saber's open-source GTM and RevOps skills library for Claude Code, inspired by [obra/superpowers](https://github.com/obra/superpowers). It packages reusable sales and revenue intelligence skills that plug directly into Claude Code via the plugin system. All skills are powered by the [Saber CLI](https://saber.app) for account intelligence, signal tracking, and prospecting.
 
 ## Installation
 
@@ -21,7 +21,7 @@ Arsenal is Saber's open-source GTM and RevOps skills library for Claude Code, in
 
 | Skill | Description |
 |---|---|
-| `hello-world` | Placeholder skill confirming Arsenal is installed. Use as a template for new GTM skills. |
+| `hello-world` | Placeholder skill confirming Saber Arsenal is installed. Use as a template for new GTM skills. |
 
 ## Contributing a new skill
 
