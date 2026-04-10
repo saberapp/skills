@@ -1,54 +1,61 @@
 ---
 name: score-accounts
 description: >
-  Score and rank a Saber account list by signal strength to surface the highest-priority
-  targets for outreach.
+  Score and rank a list of accounts by signal strength to surface the highest-priority
+  targets for outreach. Works with Saber signal results, Apollo data, HubSpot properties,
+  or any pasted signal data.
 ---
 
 # Score Accounts
 
-Use this skill to rank the companies in a Saber account list by the strength of their
-signal results, so you can focus outreach on the highest-intent accounts.
+Use this skill to rank accounts by the strength of their signals so you can focus outreach
+on the highest-intent targets first.
 
-## Saber CLI check
+Works with signal data from any source — Saber subscriptions, Apollo exports, HubSpot
+properties, or manually researched signals. The scoring algorithm is the same regardless
+of where the data comes from.
 
-Run `saber --help` to check if the Saber CLI is installed.
+## Step 1 — Get the signal data
 
-**If not installed:** inform the user that scoring accounts requires the Saber CLI
-(available at saber.app). Offer to work manually if the user can paste signal results directly.
+Ask the user how their signal data is available:
 
-## Step 1 — Identify the list and signals
+---
 
-Ask the user which list they want to score, or help them find it:
+### Path A — Saber CLI
+
+Run `saber --help` to confirm the CLI is installed.
+
+Find the account list and active subscriptions:
 ```bash
 saber list company list
-```
-
-Then find the active signal subscriptions for that list:
-```bash
 saber subscription list
 ```
 
-If no subscriptions have been run yet, offer to run signals first using `create-company-signals`, then return here.
-
-## Step 2 — Fetch signal results
-
-For each relevant subscription, retrieve results:
+Fetch results for each relevant subscription:
 ```bash
 saber subscription get <subscriptionId>
 ```
 
-Collect results for all companies and all signal questions into a working dataset. Note:
-- Which companies had which signals fire positively
-- How recently the signals ran (fresher = more reliable)
-- Each signal's category (`icp_fit`, `urgency`, `buying_signal`) and weight (1–3) if available
-  from `generate-signals` output in conversation context
+If no subscriptions have run yet, offer to activate signals first using `create-company-signals`, then return here.
 
-## Step 3 — Score each company
+---
+
+### Path B — Any other source
+
+Ask the user to provide signal results. Accepted formats:
+- Paste a table or CSV with columns: Company, Domain, [Signal 1], [Signal 2], ...
+- Describe what they know for each account (e.g. "Acme raised a round, Beta is hiring SDRs")
+- Share a HubSpot export or Apollo enrichment output
+
+Confirm which signals are present and what a positive result looks like for each.
+
+---
+
+## Step 2 — Apply the scoring model
 
 ### If signal metadata is available (from `generate-signals`)
 
-Use the weighted scoring algorithm:
+Use the weighted algorithm:
 
 ```
 1. For each signal, determine if the answer is "positive" per interpretation rules
@@ -70,37 +77,39 @@ Use the weighted scoring algorithm:
 - **30–49** — Low fit, monitor for triggers
 - **< 30** — Poor fit, deprioritise
 
-### If no signal metadata is available (ad-hoc signals)
+### If no signal metadata is available
 
-Fall back to a simple model:
-- **Base score:** +1 per positive signal
-- **Weighting:** ask the user if any signals are more important; weight those 2×
-- **Recency bonus:** +0.5 if the signal ran within the last 7 days
-- Normalise to 0–10 relative to the highest scorer in the list
+Ask the user if any signals are more important than others. Then apply a simple model:
+- **Base:** +1 per positive signal
+- **Priority signals:** 2× weight for signals the user flags as most important
+- **Recency bonus:** +0.5 if the signal is from the last 7 days
+- Normalise to 0–10 relative to the highest scorer
 
-## Step 4 — Present ranked results
+## Step 3 — Present ranked results
 
 ```
 ## Account Scores — [List Name]
 
-### High fit (70+)
-| Rank | Company | Domain | Score | Signals fired | Top signal |
-|------|---------|--------|-------|---------------|------------|
-| 1    | Acme Corp | acme.com | 84 | 4/5 icp_fit, 2/3 urgency | Recently funded |
+### High priority (70+ or top tier)
+| Rank | Company | Domain | Score | Top signals |
+|------|---------|--------|-------|-------------|
+| 1 | Acme Corp | acme.com | 84 | New VP Sales hired, hiring SDRs |
+| 2 | Beta Inc | beta.io | 76 | Series B 3 months ago, HubSpot migration |
 
-### Moderate fit (50–69)
-| Rank | Company | Domain | Score | Signals fired | Top signal |
-|------|---------|--------|-------|---------------|------------|
-| ...  | | | | | |
+### Watch list (moderate fit)
+| Rank | Company | Domain | Score | Top signal |
+|------|---------|--------|-------|------------|
+| ...  | | | | |
 
-### Low fit / monitor (< 50)
+### Deprioritise (low fit)
 | Rank | Company | Domain | Score | Notes |
 |------|---------|--------|-------|-------|
 | ...  | | | | |
 ```
 
-## Step 5 — Suggest next steps
+## Step 4 — Suggest next steps
 
-- **High-fit accounts:** use `write-outreach` to draft personalised messages referencing the top signal
-- **Moderate accounts:** re-run signals in 2–4 weeks to watch for urgency triggers
-- **Low-scoring accounts:** pause or remove from the active list; revisit if a trigger fires
+- **High-priority accounts:** use `write-outreach` to draft personalised messages referencing the top signal
+- **Watch list:** re-run signals in 2–4 weeks to watch for urgency triggers
+- **Low-scoring accounts:** pause or remove from active list; revisit if a trigger fires
+- Use `deal-coaching` on any high-priority account that's already in the pipeline

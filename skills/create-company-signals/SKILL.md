@@ -1,44 +1,43 @@
 ---
 name: create-company-signals
 description: >
-  Activate company-level signal tracking using the Saber CLI — creates signals for domains in a company list.
+  Activate company-level signal tracking. Runs signals via the Saber CLI if available;
+  without it, outputs a research playbook and suggests alternative tracking methods.
 ---
 
 # Create Company Signals
 
-Use this skill to run company-level signal research using the Saber CLI.
+Use this skill to run company-level signal research against a list of target accounts.
 
-## Saber CLI check
+The Saber CLI is the preferred path — it automates signal runs across your full list on a schedule.
+Without it, this skill produces a research playbook you can run manually or via other tools.
 
-Before doing anything else, check if the Saber CLI is installed by running `saber --help`.
+## Before running signals (Saber CLI)
 
-**If the CLI is available:** proceed with the full workflow below.
+If the CLI is available, check credits before executing any command that will consume them:
+```bash
+saber credits
+```
+Tell the user: "Running [N] signals against [M] companies will use [N×M] credits." Ask them to confirm.
 
-**If not installed:** inform the user that this skill requires the Saber CLI to execute signals (available at saber.app), then offer two options:
-1. **Install the CLI** — once installed, come back and restart this skill
-2. **Continue without the CLI** — document the approved signal questions and list ID so the user can run them later via the CLI or the Saber dashboard; walk through the workflow conceptually so they understand what will happen
+## Step 1 — Confirm signals and list
 
-## Prerequisites
+From conversation context, confirm:
+- The approved signal questions to activate (from `generate-signals` or `signal-discovery`)
+- The account list to run them against
 
-- Approved company signal definitions are available in conversation context (run `signal-discovery` first if not)
-- Saber CLI is available (`saber --help` works)
+To find a list ID:
+```bash
+saber list company list
+```
 
-## Before running signals
+## Step 2 — Run signals
 
-Before executing any `saber signal` or `saber subscription` command that will consume credits:
-1. Run `saber credits` and show the user their current balance.
-2. Tell the user how many signals will be run (number of companies × number of questions).
-3. Ask the user to confirm they want to proceed before issuing the command.
+---
 
-## Two modes
-
-### Mode A — Run signals against a full list (signal subscriptions)
-
-For running a signal across all companies in a list, use signal subscriptions.
+### Path A — Saber CLI (full list, subscription mode)
 
 **Option 1 — Run once (recommended for getting started)**
-
-Use `--run-once` to trigger immediately and stop the schedule automatically:
 ```bash
 saber subscription create \
   --list <listId> \
@@ -48,10 +47,9 @@ saber subscription create \
   --frequency monthly \
   --run-once
 ```
+Creates the subscription, runs it immediately, then stops the schedule.
 
 **Option 2 — Recurring schedule**
-
-Omit `--run-once` to keep the subscription active on a schedule:
 ```bash
 saber subscription create \
   --list <listId> \
@@ -61,61 +59,68 @@ saber subscription create \
   --frequency weekly
 ```
 
-Then trigger manually when needed:
-```bash
-saber subscription trigger <subscriptionId>
-```
-
 Create one subscription per signal question.
 
-### Mode B — Spot-check a specific company
-
-Use `saber signal` to run a question against a single domain:
-
+**Spot-check a single company**
 ```bash
-saber signal --domain <domain> --question "<signal question>" --answer-type boolean
+saber signal --domain <domain> --question "<question>" --answer-type boolean
 ```
 
-Use `--no-wait` to fire multiple signals without waiting for each result:
+Use `--no-wait` to fire multiple signals in parallel:
 ```bash
 saber signal --domain <domain> --question "<question>" --no-wait
 saber signal get <signalId>
 ```
 
-## Workflow (list mode)
+---
 
-### Step 1 — Confirm signals and list ID
+### Path B — No Saber CLI (research playbook)
 
-From conversation context, confirm:
-- The approved signal questions to activate
-- The account list to run them against
+Output a structured research playbook the user or their team can run manually or via other tools:
 
-To find a list ID:
-```bash
-saber list company list
+```
+SIGNAL RESEARCH PLAYBOOK — [List Name]
+
+For each company in the list, answer these questions:
+
+Signal 1: [Question]
+  Category: [icp_fit / urgency / buying_signal]
+  Weight: [1–3]
+  How to find the answer:
+    - LinkedIn: [specific search or filter]
+    - Google: [suggested search string]
+    - Apollo: [filter to apply]
+    - News: [alert or keyword to track]
+
+Signal 2: [Question]
+  [...]
+
+TRACKING TEMPLATE
+  Use a spreadsheet with columns:
+  | Company | Domain | [Signal 1] | [Signal 2] | ... | Score | Notes |
 ```
 
-### Step 2 — Create and trigger subscriptions
+Also suggest:
+- **Google Alerts** for trigger-based signals (funding, leadership changes, expansion news)
+- **Apollo or LinkedIn Sales Nav** filters for ICP-fit signals (headcount, tech stack, hiring)
+- **HubSpot custom properties** to track signal results per company if HubSpot MCP is available
 
-Create one subscription per signal question using `--run-once` to trigger immediately:
-```bash
-saber subscription create --list <listId> --name "<name>" --question "<question>" --answer-type boolean --frequency monthly --run-once
-```
+---
 
-This creates the subscription, runs it immediately, and stops the schedule automatically.
-
-### Step 3 — Review results
+## Step 3 — Review results (Saber CLI)
 
 ```bash
 saber subscription get <subscriptionId>
 ```
 
-When complete, present results to the user. Companies where signals fired positively are highest priority for outreach.
+When complete, present results. Companies where signals fired positively are highest priority for outreach.
 
-## Key commands
+After reviewing results, use `score-accounts` to rank the full list.
+
+## Key Saber commands
 
 ```bash
-saber subscription create --list <listId> --name "<name>" --question "<question>" [--answer-type] [--frequency daily|weekly|monthly] [--cron] [--timezone]
+saber subscription create --list <listId> --name "<name>" --question "<question>" [--answer-type] [--frequency] [--run-once]
 saber subscription trigger <subscriptionId>
 saber subscription get <subscriptionId>
 saber subscription list

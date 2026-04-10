@@ -1,95 +1,115 @@
 ---
 name: build-contact-list
 description: >
-  Build a target contact list using the Saber CLI and run contact signals against it.
+  Build a target contact list and run contact-level signals against them. Works with
+  the Saber CLI, Apollo, LinkedIn, HubSpot, or manual research.
 ---
 
 # Build Contact List
 
-Use this skill to build a list of target contacts in Saber and optionally run contact-level signals against them.
+Use this skill to build a list of target contacts and optionally run signals against them.
+The Saber CLI is the preferred path, but the skill works with Apollo, LinkedIn, HubSpot,
+or manual research if you don't have it.
 
-## Saber CLI check
+## Step 1 — Confirm buyer persona
 
-Before doing anything else, check if the Saber CLI is installed by running `saber --help`.
-
-**If the CLI is available:** proceed with the full workflow below.
-
-**If not installed:** inform the user that building and querying contact lists requires the Saber CLI (available at saber.app), then offer two options:
-1. **Install the CLI** — once installed, come back and restart this skill
-2. **Continue without the CLI** — help the user define their buyer persona and contact criteria (Steps 1 and 2 below); they can then create the list via the Saber dashboard or return with the CLI installed
-
-## Prerequisites
-
-- Saber CLI is available (`saber --help` works)
-- ICP context is available in the conversation (run `signal-discovery` first if not)
-- A target account list ideally exists in Saber (contacts are sourced from target accounts)
-
-## Workflow
-
-### Step 1 — Confirm buyer persona
-
-Summarise the contact criteria from conversation context:
-- Job title(s) / seniority
+Summarise the contact criteria from conversation context (ICP, `persona-research`, or ask):
+- Job title(s) and seniority
 - Department
-- Source (which account list to pull from, if applicable)
+- Source account list (if targeting contacts at specific companies)
 
 Ask the user to confirm or adjust before proceeding.
 
-### Step 2 — Build the contact list
+## Step 2 — Choose your tool
 
-Ask the user how they want to supply contacts:
+Check what's available and take the best path:
 
-**Option A — Let Saber identify contacts (recommended)**
-Use the Saber CLI to create a list filtered by title, sourced from company LinkedIn URLs.
-If a target account list exists, get the company LinkedIn URLs from it first (`saber list company companies <listId>`), then:
+---
+
+### Path A — Saber CLI (recommended)
+
+Run `saber --help` to confirm the CLI is installed.
+
+If a target account list exists, get company LinkedIn URLs from it first:
+```bash
+saber list company companies <listId>
+```
+
+Then create the contact list:
 ```bash
 saber list contact create --name "<list name>" \
   --company-linkedin <linkedin-url> \
   --company-linkedin <linkedin-url> \
   --title "<title>"
 ```
-`--company-linkedin` and `--title` are both repeatable. `--company-linkedin` is required.
 
-**Option B — Provide contacts directly**
-If the user has specific contacts in mind, ask for their LinkedIn URLs or emails and add them manually via the Saber dashboard.
+`--company-linkedin` is required. `--title` is repeatable for multiple titles.
 
-### Step 3 — Review and confirm
+---
+
+### Path B — Apollo (if Apollo MCP or CLI is available)
+
+Use Apollo to search contacts with matching criteria:
+- Title, seniority, department, company filters
+- Export results as CSV or pull via MCP
+
+If Saber CLI is also available, the contact list can be imported into Saber via the dashboard for signal activation.
+
+---
+
+### Path C — HubSpot (if HubSpot MCP is available)
+
+Pull contacts from HubSpot matching the persona:
+```
+Search HubSpot contacts where jobtitle contains [title], company.numberofemployees between [Y] and [Z]
+```
+
+Work with the results directly. If Saber CLI is available, use LinkedIn URLs from HubSpot to import into Saber.
+
+---
+
+### Path D — LinkedIn search (manual)
+
+If no tools are available:
+1. Guide the user through a Boolean LinkedIn search for the target persona
+2. Or describe which accounts and titles to search
+3. Capture results in a structured format:
+
+```
+| Name | Title | Company | LinkedIn URL | Email (if known) |
+|------|-------|---------|--------------|-----------------|
+| ...  |       |         |              |                 |
+```
+
+Suggest using `enrich-contacts` to add email and phone once the list is built.
+
+---
+
+## Step 3 — Review and confirm
 
 Show the list summary and ask the user to confirm before activating signals.
 
-### Step 4 — Sample run (optional but recommended)
+## Step 4 — Sample run (optional but recommended, Saber CLI only)
 
-Before running signals across the whole list, offer to test a small sample first so the user can validate signal quality without spending credits on every contact.
+Before running signals across the full list, test 3–5 contacts the user already knows to validate signal accuracy without spending credits on the full list.
 
-Ask the user to pick 3–5 contacts to test — ideally ones they already know something about, so they can judge whether the signal results are accurate. Get their LinkedIn profile URLs from the list in the Saber dashboard or from conversation context.
-
-For each contact and each signal question:
+For each contact:
 ```bash
 saber signal --profile <linkedin-url> --question "<question>" --answer-type boolean --no-wait
-# collect signal IDs
-```
-
-Retrieve and review results:
-```bash
 saber signal get <signalId>
 ```
 
-Present results and ask:
-- Do the signals look accurate for these contacts?
-- Any false positives or unexpected answers?
-- Do they want to proceed with the rest of the list?
+Present results and ask: do the signals look accurate? Any false positives? Proceed?
 
-Only continue to Step 5 once the user confirms the sample looks good.
+## Step 5 — Run signals on the full list (optional)
 
-### Step 5 — Run signals on the full list (optional)
+If approved contact signals are available in conversation context, offer to run them using `create-contact-signals`.
 
-If approved contact signals are available in conversation context, offer to run them using the `create-contact-signals` skill.
-
-### Step 6 — Prioritize
+## Step 6 — Prioritise
 
 After signals complete, present results ranked by intent so the user can sequence outreach.
 
-## Key commands
+## Key Saber commands
 
 ```bash
 saber list contact create --name "<name>" --company-linkedin <url> [--title] [--keyword] [--country]

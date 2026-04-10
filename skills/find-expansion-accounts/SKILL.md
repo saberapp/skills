@@ -1,45 +1,56 @@
 ---
 name: find-expansion-accounts
 description: >
-  Identify existing customers showing buying signals for upsell or cross-sell opportunities
-  using the Saber CLI.
+  Identify existing customers showing buying signals for upsell or cross-sell opportunities.
+  Works with Saber, HubSpot, or any available customer data source.
 ---
 
 # Find Expansion Accounts
 
-Use this skill to surface upsell and cross-sell opportunities within your existing customer base by running expansion-focused signals against a list of current accounts.
+Use this skill to surface upsell and cross-sell opportunities within your existing customer base
+by running expansion-focused signals against a list of current accounts.
 
-## Saber CLI check
-
-Before doing anything else, check if the Saber CLI is installed by running `saber --help`.
-
-**If not installed:** inform the user that this skill requires the Saber CLI (available at saber.app).
+Works with or without the Saber CLI — the HubSpot MCP or a manual customer list are equally valid starting points.
 
 ## Step 1 — Get the customer list
 
-Ask the user how they want to provide their existing customer accounts:
+Ask the user how their customer data is available:
 
-**Option A — Existing Saber list:**
+---
+
+### Path A — Saber CLI
+
+Run `saber --help` to confirm the CLI is installed.
+
 ```bash
 saber list company list
 ```
-Ask which list contains current customers.
 
-**Option B — Import from HubSpot:**
-If customers are tracked in HubSpot (e.g. lifecycle stage = "Customer"), use the `import-from-hubspot` skill to pull them into Saber first, then return here.
+Ask which list contains current customers. If a customer list doesn't exist yet, offer to create one.
 
-**Option C — Manual list:**
-If the user has a list of domains, create a new Saber list:
-```bash
-saber list company create --name "Existing Customers"
+---
+
+### Path B — HubSpot MCP (if available)
+
+Pull customers directly using the HubSpot MCP:
 ```
-Then ask them to add companies via the Saber dashboard.
+Fetch HubSpot companies where lifecycle_stage = "customer"
+```
+
+Return company name and domain for each. If Saber CLI is available, create a Saber list from these domains. If not, work with the HubSpot data directly.
+
+---
+
+### Path C — Manual list
+
+Ask the user to provide a list of customer domains or company names. Work with that list directly.
+
+---
 
 ## Step 2 — Define expansion signals
 
-Expansion signals are different from acquisition signals — they indicate readiness to buy *more* or to expand into adjacent products/seats. Work with the user to define 3–5 expansion-specific signal questions.
-
-Common expansion signal types:
+Expansion signals indicate readiness to buy more or expand into adjacent products/seats.
+Work with the user to define 3–5 expansion-specific signal questions.
 
 **Growth signals** (they're scaling and may need more):
 - "Is this company actively hiring in roles that would use our product?"
@@ -53,23 +64,23 @@ Common expansion signal types:
 **Intent signals** (they're researching adjacent solutions):
 - "Is this company evaluating or recently adopted [complementary tool]?"
 
-Also consider **at-risk signals** — if the goal is retention, not just expansion:
+**At-risk signals** (if the goal is retention, not just expansion):
 - "Is this company reducing headcount or announcing layoffs?"
 - "Is the original buyer at this company still in their role?"
 
-If signal definitions already exist in conversation context (from `signal-discovery`), check whether they're relevant for expansion or whether new ones are needed.
+If signal definitions already exist in conversation context, check whether they're relevant for expansion or whether new ones are needed.
 
-## Step 3 — Check credits and confirm
+## Step 3 — Run expansion signals
 
+### With Saber CLI
+
+Check credits first:
 ```bash
 saber credits
 ```
-
 Tell the user: "Running [N] signals against [M] accounts will use [N×M] credits." Ask them to confirm.
 
-## Step 4 — Run expansion signals
-
-For a full list, create subscriptions:
+Then create subscriptions:
 ```bash
 saber subscription create \
   --list <listId> \
@@ -82,18 +93,22 @@ saber subscription create \
 
 Create one subscription per signal question. Use `--run-once` to get results immediately.
 
-## Step 5 — Retrieve and score results
+### Without Saber CLI
 
-```bash
-saber subscription get <subscriptionId>   # for each expansion signal subscription
+For each customer and each expansion signal question, research manually or via available tools:
+- Web search for recent news (funding, hiring, expansion, layoffs)
+- HubSpot MCP: check custom properties or notes for relevant activity
+- LinkedIn: check company updates and job postings
+
+Record findings in a structured table:
+
+```
+| Company | Growth signal | Problem signal | Intent signal | At-risk signal |
+|---------|--------------|----------------|---------------|----------------|
+| Acme    | ✓ Hiring     | —              | ✓ Eval HubSpot | —             |
 ```
 
-Score each customer account:
-- +1 per positive expansion signal
-- −1 per at-risk signal (if defined)
-- Weight growth signals higher if the user's product is usage-based
-
-## Step 6 — Present expansion opportunities
+## Step 4 — Score and present expansion opportunities
 
 ```
 ## Expansion Opportunities — [Customer List Name]
@@ -114,8 +129,9 @@ Score each customer account:
 | Gamma Ltd | gamma.io | Reducing headcount |
 ```
 
-## Step 7 — Suggest next steps
+## Step 5 — Suggest next steps
 
 - **High priority accounts:** use `write-outreach` with expansion-focused messaging — reference the specific growth signal as the reason for reaching out
-- **Watch list accounts:** schedule signal re-runs in 4 weeks to track movement
+- **Watch list accounts:** re-run signals in 4 weeks to track movement
 - **At-risk accounts:** flag for the account management team and consider a proactive check-in
+- Use `deal-coaching` for any expansion account already in a conversation
