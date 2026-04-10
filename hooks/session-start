@@ -1,4 +1,30 @@
 #!/usr/bin/env bash
+
+PLUGIN_ROOT="${CLAUDE_PLUGIN_ROOT:-$(cd "$(dirname "$0")/.." && pwd)}"
+
+# ── Installed version ─────────────────────────────────────────────────────────
+INSTALLED_VERSION=$(python3 -c "
+import json, sys
+try:
+    d = json.load(open('${PLUGIN_ROOT}/.claude-plugin/plugin.json'))
+    print(d['version'])
+except Exception:
+    sys.exit(1)
+" 2>/dev/null)
+
+# ── Latest version from marketplace (silent failure, 3s timeout) ──────────────
+LATEST_VERSION=$(curl -sf --max-time 3 \
+  "https://raw.githubusercontent.com/saberapp/arsenal-marketplace/main/marketplace.json" \
+  2>/dev/null | python3 -c "
+import json, sys
+try:
+    d = json.load(sys.stdin)
+    print(d['plugins'][0]['version'])
+except Exception:
+    sys.exit(1)
+" 2>/dev/null)
+
+# ── Context output ────────────────────────────────────────────────────────────
 echo "# Saber Arsenal"
 echo "Saber Arsenal is installed — GTM and RevOps skills for Claude Code, powered by the Saber CLI."
 echo ""
@@ -11,4 +37,13 @@ echo "  - build-contact-list     — build a target contact list and run signals
 echo "  - enrich-contacts        — find email and phone for contacts via Apollo, Cognism, and others"
 echo ""
 echo "Skills that use the Saber CLI will check if it is installed and offer a fallback path if not."
+
+# ── Update notification ───────────────────────────────────────────────────────
+if [ -n "$LATEST_VERSION" ] && [ -n "$INSTALLED_VERSION" ] && [ "$LATEST_VERSION" != "$INSTALLED_VERSION" ]; then
+  echo ""
+  echo "Update available: Saber Arsenal v${INSTALLED_VERSION} → v${LATEST_VERSION}"
+  echo "Run /plugins update saber-arsenal to update."
+fi
+
+echo ""
 echo "Use the Skill tool to invoke any Saber Arsenal skill."
