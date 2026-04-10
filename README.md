@@ -27,6 +27,15 @@ Saber Arsenal is Saber's open-source GTM and RevOps skills library for Claude Co
 | `build-account-list` | Build a target account list and run company signals. | Yes |
 | `build-contact-list` | Build a target contact list and run contact signals. | Yes |
 | `enrich-contacts` | Find email and phone for contacts using Apollo, Cognism, Hunter.io, or any available MCP/CLI enrichment provider. | No |
+| `research-account` | Build a full account brief — signals, web research, CRM data, and a call prep summary. | Optional |
+| `qualify-inbound` | Score an inbound lead using Saber signals and return a High / Medium / Low rating. | Optional |
+| `score-accounts` | Rank a list of accounts by combined signal strength using a weighted scoring model. | Yes |
+| `write-outreach` | Write personalised cold email and LinkedIn messages using Saber signal results. | Optional |
+| `build-sequence` | Design a multi-step outreach sequence with signal-triggered message variants. | Optional |
+| `find-expansion-accounts` | Identify existing customers showing upsell or cross-sell signals. | Optional |
+| `manage-signals` | View, pause, resume, and trigger active signal subscriptions. | Yes |
+| `import-from-hubspot` | Pull a HubSpot list into Saber as a target account or contact list. | Yes |
+| `sync-to-hubspot` | Push Saber signal results back to HubSpot as contact or company properties. | Yes |
 
 ## Contributing a new skill
 
