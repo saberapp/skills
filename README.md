@@ -45,66 +45,66 @@ Arsenal activates on the next session start. All available skills are listed in 
 
 ### Signal foundations
 
-| Skill | What it does | Saber CLI |
-|---|---|---|
-| `signal-discovery` | Guided entry point — loads org context, runs `extract-icp` then `generate-signals` in sequence. Start here. | Optional |
-| `extract-icp` | Researches a company domain and extracts a structured ICP: target profile, buying committee, pain points, buying triggers. | No |
-| `generate-signals` | Turns a structured ICP into 12–15 weighted research signals with scoring rules across `icp_fit`, `urgency`, and `buying_signal` categories. | No |
+| Skill | What it does |
+|---|---|
+| `signal-discovery` | Guided entry point — loads org context, runs `extract-icp` then `generate-signals` in sequence. Start here. |
+| `extract-icp` | Researches a company domain and extracts a structured ICP: target profile, buying committee, pain points, buying triggers. |
+| `generate-signals` | Turns a structured ICP into 12–15 weighted research signals with scoring rules across `icp_fit`, `urgency`, and `buying_signal` categories. |
 
 ### Market and persona intelligence
 
-| Skill | What it does | Saber CLI |
-|---|---|---|
-| `market-map` | Maps a target market — segments, company density, key players, adjacent verticals, and recommended entry points. | No |
-| `persona-research` | Builds a deep profile of a buying persona: motivations, challenges, buying behaviour, language they use, where to find them. | No |
-| `competitive-intel` | Maps the competitive landscape, profiles key competitors, and builds battle cards for deals where they come up. | No |
+| Skill | What it does |
+|---|---|
+| `market-map` | Maps a target market — segments, company density, key players, adjacent verticals, and recommended entry points. |
+| `persona-research` | Builds a deep profile of a buying persona: motivations, challenges, buying behaviour, language they use, where to find them. |
+| `competitive-intel` | Maps the competitive landscape, profiles key competitors, and builds battle cards for deals where they come up. |
 
 ### List building
 
-| Skill | What it does | Saber CLI |
-|---|---|---|
-| `build-account-list` | Builds a target account list using Saber, Apollo, HubSpot, or manual research. Runs signals if Saber is available. | Optional |
-| `build-contact-list` | Builds a target contact list using Saber, Apollo, LinkedIn, or manual research. Runs signals if Saber is available. | Optional |
-| `enrich-contacts` | Finds email and phone for contacts using Apollo, Cognism, Hunter.io, or any connected enrichment provider. | No |
+| Skill | What it does |
+|---|---|
+| `build-account-list` | Builds a target account list using Saber, Apollo, HubSpot, or manual research. Runs signals if Saber is available. |
+| `build-contact-list` | Builds a target contact list using Saber, Apollo, LinkedIn, or manual research. Runs signals if Saber is available. |
+| `enrich-contacts` | Finds email and phone for contacts using Apollo, Cognism, Hunter.io, or any connected enrichment provider. |
 
 ### Research and qualification
 
-| Skill | What it does | Saber CLI |
-|---|---|---|
-| `research-account` | Builds a full account brief — signals, hiring, funding, news, tech stack, and a call prep summary. | Optional |
-| `qualify-inbound` | Scores an inbound lead by running signals against their domain. Returns High / Medium / Low with reasoning. | Optional |
-| `score-accounts` | Ranks accounts by signal strength using the weighted scoring model from `generate-signals`. Works with Saber results, Apollo exports, or any pasted data. | Optional |
+| Skill | What it does |
+|---|---|
+| `research-account` | Builds a full account brief — signals, hiring, funding, news, tech stack, and a call prep summary. |
+| `qualify-inbound` | Scores an inbound lead by running signals against their domain. Returns High / Medium / Low with reasoning. |
+| `score-accounts` | Ranks accounts by signal strength using the weighted scoring model from `generate-signals`. Works with Saber results, Apollo exports, or any pasted data. |
 
 ### Signal activation
 
-| Skill | What it does | Saber CLI |
-|---|---|---|
-| `create-company-signals` | Activates company-level signal tracking via Saber subscriptions. Without CLI, outputs a research playbook. | Optional |
-| `create-contact-signals` | Activates contact-level signal tracking via Saber subscriptions. | Yes |
-| `manage-signals` | Lists all signal subscriptions — pause, resume, trigger, or review results. | Yes |
+| Skill | What it does |
+|---|---|
+| `create-company-signals` | Activates company-level signal tracking via Saber subscriptions. Without CLI, outputs a research playbook. |
+| `create-contact-signals` | Activates contact-level signal tracking via Saber subscriptions. |
+| `manage-signals` | Lists all signal subscriptions — pause, resume, trigger, or review results. |
 
 ### Outreach
 
-| Skill | What it does | Saber CLI |
-|---|---|---|
-| `write-outreach` | Writes personalised cold email and LinkedIn messages. Pulls signal results from Saber if available; works from any signal data. | Optional |
-| `build-sequence` | Designs a multi-step outreach sequence with signal-triggered message variants across email and LinkedIn. | Optional |
-| `objection-handler` | Builds an objection library for your ICP — common objections mapped to the real concern, with response frameworks. | No |
+| Skill | What it does |
+|---|---|
+| `write-outreach` | Writes personalised cold email and LinkedIn messages. Pulls signal results from Saber if available; works from any signal data. |
+| `build-sequence` | Designs a multi-step outreach sequence with signal-triggered message variants across email and LinkedIn. |
+| `objection-handler` | Builds an objection library for your ICP — common objections mapped to the real concern, with response frameworks. |
 
 ### Pipeline and deal management
 
-| Skill | What it does | Saber CLI |
-|---|---|---|
-| `deal-coaching` | Analyses a specific deal — health assessment, risk flags, stakeholder map, and recommended next steps. | Optional |
-| `pipeline-review` | Audits pipeline health from HubSpot or pasted data — at-risk deals, forecast analysis, and a weekly focus list. | No |
-| `find-expansion-accounts` | Runs expansion signals against existing customers to surface upsell and cross-sell opportunities. | Optional |
+| Skill | What it does |
+|---|---|
+| `deal-coaching` | Analyses a specific deal — health assessment, risk flags, stakeholder map, and recommended next steps. |
+| `pipeline-review` | Audits pipeline health from HubSpot or pasted data — at-risk deals, forecast analysis, and a weekly focus list. |
+| `find-expansion-accounts` | Runs expansion signals against existing customers to surface upsell and cross-sell opportunities. |
 
 ### CRM
 
-| Skill | What it does | Saber CLI |
-|---|---|---|
-| `import-from-hubspot` | Pulls a HubSpot company list, view, or segment into Saber as a target account or contact list. | Yes |
-| `sync-to-hubspot` | Pushes Saber signal results back to HubSpot as contact or company properties. | Yes |
+| Skill | What it does |
+|---|---|
+| `import-from-hubspot` | Pulls a HubSpot company list, view, or segment into Saber as a target account or contact list. |
+| `sync-to-hubspot` | Pushes Saber signal results back to HubSpot as contact or company properties. |
 
 ---
 
@@ -156,7 +156,7 @@ Arsenal: Subject: saw you're scaling the sales team at Kombo
 
 ## The Saber CLI
 
-Skills marked **Optional** in the table above work without the Saber CLI but do more with it. The CLI adds:
+Most skills work without the Saber CLI. The CLI unlocks:
 
 - **Automated signal runs** — run research questions across hundreds of accounts on a schedule
 - **Contact-level signals** — research individuals by LinkedIn URL
