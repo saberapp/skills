@@ -1,6 +1,6 @@
 # Saber Arsenal
 
-Saber Arsenal is Saber's open-source GTM and RevOps skills library for Claude Code, inspired by [obra/superpowers](https://github.com/obra/superpowers). It packages reusable sales and revenue intelligence skills that plug directly into Claude Code via the plugin system. All skills are powered by the [Saber CLI](https://saber.app) for account intelligence, signal tracking, and prospecting.
+Saber Arsenal is Saber's open-source GTM and RevOps skills library for Claude Code, inspired by [obra/superpowers](https://github.com/obra/superpowers). It packages reusable sales and revenue intelligence skills that plug directly into Claude Code via the plugin system. Many skills are powered by the [Saber CLI](https://saber.app) — each skill will check for the CLI and offer a fallback path if it is not installed.
 
 ## Installation
 
@@ -19,13 +19,13 @@ Saber Arsenal is Saber's open-source GTM and RevOps skills library for Claude Co
 
 ## Available skills
 
-| Skill | Description |
-|---|---|
-| `saber-signal-discovery` | Define buying signals that match your ICP — start here before creating signals or building lists. |
-| `saber-create-company-signals` | Activate company-level signal tracking using the Saber CLI. |
-| `saber-create-contact-signals` | Activate contact-level signal tracking using the Saber CLI. |
-| `saber-build-account-list` | Build a target account list using the Saber CLI and run company signals against it. |
-| `saber-build-contact-list` | Build a target contact list using the Saber CLI and run contact signals against it. |
+| Skill | Description | Requires Saber CLI |
+|---|---|---|
+| `signal-discovery` | Define buying signals that match your ICP — start here. | Optional |
+| `create-company-signals` | Activate company-level signal tracking. | Yes |
+| `create-contact-signals` | Activate contact-level signal tracking. | Yes |
+| `build-account-list` | Build a target account list and run company signals. | Yes |
+| `build-contact-list` | Build a target contact list and run contact signals. | Yes |
 
 ## Contributing a new skill
 
@@ -41,7 +41,8 @@ description: One-line description of what this skill does.
 # My Skill
 
 Prompt content goes here. Describe what Claude should do when this skill is invoked.
-All skills should use the Saber CLI where relevant.
+If the skill uses the Saber CLI, include a "Saber CLI check" section that handles the
+case where the CLI is not installed.
 ```
 
 3. Open a pull request — skills are automatically picked up from the `skills/` directory.

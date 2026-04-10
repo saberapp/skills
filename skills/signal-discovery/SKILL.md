@@ -1,31 +1,45 @@
 ---
-name: saber-signal-discovery
+name: signal-discovery
 description: >
   Define buying signals that match your ICP — start here before creating signals or building lists.
 ---
 
-# Saber Signal Discovery
+# Signal Discovery
 
 Use this skill to help the user define what buying intent looks like for their Ideal Customer Profile (ICP) before activating signal tracking.
 
 ## Goal
 
-Produce a clear ICP definition and a set of approved signal definitions in conversation context, ready to be activated via the Saber CLI.
+Produce a clear ICP definition and a set of approved signal definitions in conversation context, ready to be activated — ideally via the Saber CLI, or documented for manual use if the CLI is not available.
+
+## Saber CLI check
+
+Before doing anything else, check if the Saber CLI is installed by running `saber --help`.
+
+**If the CLI is available:** proceed with the full workflow below.
+
+**If not installed:** inform the user that this skill works best with the Saber CLI (available at saber.app), then offer two options:
+1. **Install the CLI** — once installed, come back and restart this skill
+2. **Continue without the CLI** — skip the `saber org get` step and ask for org context manually; the rest of the skill (ICP definition and signal design) works fully without the CLI
 
 ## Workflow
 
 ### Step 1 — Load organisation context
 
-Before asking anything, run: `saber org get`
-
+**With CLI:** run `saber org get`
 - If the profile contains name, website, and description fields → use them directly, skip asking.
 - If the profile is empty or missing key fields → ask the user to fill in the gaps, then run
   `saber org update --name "..." --general "..." --products "..." --use-cases "..." --value-prop "..."`
   to persist the context for future sessions.
 
-Do not ask questions that are already answered by the org profile.
+**Without CLI:** ask the user directly:
+- What does your company do?
+- Who do you sell to?
+- What problem do you solve?
 
-Once org context is established, you still need ICP specifics — ask these in order:
+Do not ask questions that are already answered by available context.
+
+Once org context is established, ask these ICP questions in order:
 1. **Who do you sell to?** (industry, company size, geography, buyer title) — required to define the ICP
 2. **Who is the buyer?** (title, seniority, department — e.g. "VP Sales", "Head of RevOps")
 3. **What makes a company ready to buy?** (triggers — e.g. new sales hire, funding round, tech migration)
@@ -48,9 +62,9 @@ Present the proposed signals and ask for feedback. Adjust as needed.
 Keep the agreed ICP and signal definitions in conversation context — do not write them to files.
 
 Once signals are approved, tell the user:
-- To build a target list first: use the `saber-build-account-list` or `saber-build-contact-list` skill
-- To activate company signals: use the `saber-create-company-signals` skill
-- To activate contact signals: use the `saber-create-contact-signals` skill
+- To build a target list first: use the `build-account-list` or `build-contact-list` skill
+- To activate company signals: use the `create-company-signals` skill
+- To activate contact signals: use the `create-contact-signals` skill
 
 ## Example signals
 

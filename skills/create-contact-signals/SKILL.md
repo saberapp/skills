@@ -1,16 +1,26 @@
 ---
-name: saber-create-contact-signals
+name: create-contact-signals
 description: >
   Activate contact-level signal tracking using the Saber CLI — creates signals for contacts in a contact list.
 ---
 
-# Saber Create Contact Signals
+# Create Contact Signals
 
 Use this skill to run contact-level signal research using the Saber CLI.
 
+## Saber CLI check
+
+Before doing anything else, check if the Saber CLI is installed by running `saber --help`.
+
+**If the CLI is available:** proceed with the full workflow below.
+
+**If not installed:** inform the user that this skill requires the Saber CLI to execute signals (available at saber.app), then offer two options:
+1. **Install the CLI** — once installed, come back and restart this skill
+2. **Continue without the CLI** — document the approved signal questions and contact LinkedIn URLs so the user can run them later via the CLI; walk through the workflow conceptually so they know what to expect
+
 ## Prerequisites
 
-- Approved contact signal definitions are available in conversation context (run `saber-signal-discovery` first if not)
+- Approved contact signal definitions are available in conversation context (run `signal-discovery` first if not)
 - Saber CLI is available (`saber --help` works)
 
 ## Before running signals

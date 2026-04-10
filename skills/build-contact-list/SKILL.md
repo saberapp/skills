@@ -1,17 +1,27 @@
 ---
-name: saber-build-contact-list
+name: build-contact-list
 description: >
   Build a target contact list using the Saber CLI and run contact signals against it.
 ---
 
-# Saber Build Contact List
+# Build Contact List
 
 Use this skill to build a list of target contacts in Saber and optionally run contact-level signals against them.
+
+## Saber CLI check
+
+Before doing anything else, check if the Saber CLI is installed by running `saber --help`.
+
+**If the CLI is available:** proceed with the full workflow below.
+
+**If not installed:** inform the user that building and querying contact lists requires the Saber CLI (available at saber.app), then offer two options:
+1. **Install the CLI** — once installed, come back and restart this skill
+2. **Continue without the CLI** — help the user define their buyer persona and contact criteria (Steps 1 and 2 below); they can then create the list via the Saber dashboard or return with the CLI installed
 
 ## Prerequisites
 
 - Saber CLI is available (`saber --help` works)
-- ICP context is available in the conversation (run `saber-signal-discovery` first if not)
+- ICP context is available in the conversation (run `signal-discovery` first if not)
 - A target account list ideally exists in Saber (contacts are sourced from target accounts)
 
 ## Workflow
@@ -73,7 +83,7 @@ Only continue to Step 5 once the user confirms the sample looks good.
 
 ### Step 5 — Run signals on the full list (optional)
 
-If approved contact signals are available in conversation context, offer to run them using the `saber-create-contact-signals` skill.
+If approved contact signals are available in conversation context, offer to run them using the `create-contact-signals` skill.
 
 ### Step 6 — Prioritize
 

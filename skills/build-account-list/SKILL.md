@@ -1,17 +1,27 @@
 ---
-name: saber-build-account-list
+name: build-account-list
 description: >
   Build a target account list using the Saber CLI and run company signals against it.
 ---
 
-# Saber Build Account List
+# Build Account List
 
 Use this skill to build a list of target accounts in Saber and optionally run company signals against them.
+
+## Saber CLI check
+
+Before doing anything else, check if the Saber CLI is installed by running `saber --help`.
+
+**If the CLI is available:** proceed with the full workflow below.
+
+**If not installed:** inform the user that building and querying account lists requires the Saber CLI (available at saber.app), then offer two options:
+1. **Install the CLI** — once installed, come back and restart this skill
+2. **Continue without the CLI** — help the user define their account criteria (Steps 1 and 2 below) and document what filters to apply; they can then create the list via the Saber dashboard or return with the CLI installed
 
 ## Prerequisites
 
 - Saber CLI is available (`saber --help` works)
-- ICP context is available in the conversation (run `saber-signal-discovery` first if not)
+- ICP context is available in the conversation (run `signal-discovery` first if not)
 
 ## Workflow
 
@@ -95,7 +105,7 @@ Only proceed to Step 5 once the user confirms the sample looks good.
 
 ### Step 5 — Run signals on the full list (optional)
 
-If approved signals are available in conversation context, offer to run them against the full list now using the `saber-create-company-signals` skill.
+If approved signals are available in conversation context, offer to run them against the full list now using the `create-company-signals` skill.
 
 ## Key commands
 

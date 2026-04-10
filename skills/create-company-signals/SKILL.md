@@ -1,16 +1,26 @@
 ---
-name: saber-create-company-signals
+name: create-company-signals
 description: >
   Activate company-level signal tracking using the Saber CLI — creates signals for domains in a company list.
 ---
 
-# Saber Create Company Signals
+# Create Company Signals
 
 Use this skill to run company-level signal research using the Saber CLI.
 
+## Saber CLI check
+
+Before doing anything else, check if the Saber CLI is installed by running `saber --help`.
+
+**If the CLI is available:** proceed with the full workflow below.
+
+**If not installed:** inform the user that this skill requires the Saber CLI to execute signals (available at saber.app), then offer two options:
+1. **Install the CLI** — once installed, come back and restart this skill
+2. **Continue without the CLI** — document the approved signal questions and list ID so the user can run them later via the CLI or the Saber dashboard; walk through the workflow conceptually so they understand what will happen
+
 ## Prerequisites
 
-- Approved company signal definitions are available in conversation context (run `saber-signal-discovery` first if not)
+- Approved company signal definitions are available in conversation context (run `signal-discovery` first if not)
 - Saber CLI is available (`saber --help` works)
 
 ## Before running signals
