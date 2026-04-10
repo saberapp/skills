@@ -14,7 +14,7 @@ except Exception:
 
 # ── Latest version from marketplace (silent failure, 3s timeout) ──────────────
 LATEST_VERSION=$(curl -sf --max-time 3 \
-  "https://raw.githubusercontent.com/saberapp/arsenal-marketplace/main/marketplace.json" \
+  "https://raw.githubusercontent.com/saberapp/saber-marketplace/main/.claude-plugin/marketplace.json" \
   2>/dev/null | python3 -c "
 import json, sys
 try:
