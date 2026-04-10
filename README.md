@@ -26,6 +26,7 @@ Saber Arsenal is Saber's open-source GTM and RevOps skills library for Claude Co
 | `create-contact-signals` | Activate contact-level signal tracking. | Yes |
 | `build-account-list` | Build a target account list and run company signals. | Yes |
 | `build-contact-list` | Build a target contact list and run contact signals. | Yes |
+| `enrich-contacts` | Find email and phone for contacts using Apollo, Cognism, Hunter.io, or any available MCP/CLI enrichment provider. | No |
 
 ## Contributing a new skill
 
