@@ -6,10 +6,7 @@ Saber Arsenal is Saber's open-source GTM and RevOps skills library for Claude Co
 
 ### Marketplace install (recommended)
 
-```
-/plugins add-marketplace saberapp/arsenal-marketplace
-/plugins install saber-arsenal
-```
+Run `/plugins` to open the plugin manager, then add `saberapp/arsenal-marketplace` as a marketplace. This installs `saber-arsenal` automatically.
 
 ### Direct URL install (contributors and testers)
 
