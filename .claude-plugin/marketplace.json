@@ -1,0 +1,10 @@
+{
+  "name": "arsenal",
+  "source": {
+    "source": "url",
+    "url": "https://github.com/saberapp/arsenal.git"
+  },
+  "description": "GTM and RevOps skills for Claude Code — by Saber",
+  "version": "0.1.0",
+  "strict": true
+}

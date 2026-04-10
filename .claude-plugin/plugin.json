@@ -1,0 +1,15 @@
+{
+  "name": "arsenal",
+  "description": "GTM and RevOps skills for Claude Code — by Saber",
+  "version": "0.1.0",
+  "author": {
+    "name": "Saber",
+    "email": "hello@saber.app"
+  },
+  "homepage": "https://github.com/saberapp/arsenal",
+  "repository": "https://github.com/saberapp/arsenal",
+  "license": "MIT",
+  "keywords": ["gtm", "revops", "sales", "skills", "saber"],
+  "skills": "./skills/",
+  "hooks": "./hooks/hooks.json"
+}

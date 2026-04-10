@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+echo "# Arsenal GTM Skills"
+echo "Arsenal is installed. Available skills: hello-world (placeholder)."
+echo "Use the Skill tool to invoke any Arsenal skill."
