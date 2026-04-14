@@ -1,8 +1,8 @@
 # Saber Skills
 
-Saber Skills is an open-source GTM skills library for Claude Code, built by [Saber](https://saber.app). It gives revenue and GTM teams 23 slash commands covering the full outbound motion — from market mapping and ICP extraction to account scoring, personalised outreach, and pipeline review.
+Saber Skills is an open-source GTM skills library built by [Saber](https://saber.app). It gives revenue and GTM teams 23 skills covering the full outbound motion — from market mapping and ICP extraction to account scoring, personalised outreach, and pipeline review.
 
-Most skills work without any special tools. Skills that benefit from the [Saber CLI](https://saber.app) will say so — and every one of them offers a meaningful path without it.
+Works with Claude Code, Cursor, Gemini CLI, and any agent that supports skills. Most skills work without any special tools. Skills that benefit from the [Saber CLI](https://saber.app) will say so — and every one of them offers a meaningful path without it.
 
 ---
 
@@ -16,15 +16,21 @@ Saber Skills covers three stages of the GTM motion:
 3. Engage      →  Research accounts. Write outreach. Manage deals. Sync to CRM.
 ```
 
-Each skill is a focused prompt that guides Claude through a structured workflow. Skills hand off to each other naturally — `signal-discovery` feeds `build-account-list`, which feeds `score-accounts`, which feeds `write-outreach`.
+Each skill is a focused prompt that guides your agent through a structured workflow. Skills hand off to each other naturally — `signal-discovery` feeds `build-account-list`, which feeds `score-accounts`, which feeds `write-outreach`.
 
 ---
 
 ## Installation
 
-### Via the Saber Marketplace (recommended)
+### Via skills.sh (any agent)
 
-In Claude Code:
+```
+npx skills add saberapp/skills
+```
+
+Works with Claude Code, Cursor, Gemini CLI, GitHub Copilot, and [40+ other agents](https://skills.sh).
+
+### Via the Saber Marketplace (Claude Code)
 
 ```
 /plugin marketplace add saberapp/saber-marketplace
@@ -33,7 +39,7 @@ In Claude Code:
 
 Saber Skills activates on the next session start. All available skills are listed in the session header.
 
-### Direct URL install (contributors and testers)
+### Direct URL install (Claude Code — contributors and testers)
 
 ```
 /plugin install --url https://github.com/saberapp/skills
