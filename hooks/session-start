@@ -25,8 +25,8 @@ except Exception:
 " 2>/dev/null)
 
 # ── Context output ────────────────────────────────────────────────────────────
-echo "# Saber Arsenal"
-echo "Saber Arsenal is installed — GTM and RevOps skills for Claude Code, powered by the Saber CLI."
+echo "# Saber Skills"
+echo "Saber Skills is installed — GTM and RevOps skills for Claude Code, by Saber."
 echo ""
 echo "Available skills:"
 echo ""
@@ -75,7 +75,7 @@ echo "Skills that use the Saber CLI will check if it is installed and offer a fa
 if [ -n "$LATEST_VERSION" ] && [ -n "$INSTALLED_VERSION" ] && [ "$LATEST_VERSION" != "$INSTALLED_VERSION" ]; then
   echo ""
   echo "Update available: Saber Arsenal v${INSTALLED_VERSION} → v${LATEST_VERSION}"
-  echo "Run /plugins update saber-arsenal to update."
+  echo "Run /plugins update saber-skills to update."
 fi
 
 echo ""

@@ -1,13 +1,13 @@
 {
-  "name": "saber-arsenal",
-  "description": "Saber Arsenal — GTM and RevOps skills for Claude Code, powered by the Saber CLI",
+  "name": "saber-skills",
+  "description": "Saber Skills — GTM and RevOps skills for Claude Code, by Saber",
   "version": "0.1.0",
   "author": {
     "name": "Saber",
     "email": "hello@saber.app"
   },
-  "homepage": "https://github.com/saberapp/arsenal",
-  "repository": "https://github.com/saberapp/arsenal",
+  "homepage": "https://github.com/saberapp/skills",
+  "repository": "https://github.com/saberapp/skills",
   "license": "MIT",
   "keywords": ["gtm", "revops", "sales", "skills", "saber"],
   "skills": "./skills/",

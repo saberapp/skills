@@ -1,6 +1,6 @@
-# Saber Arsenal
+# Saber Skills
 
-Saber Arsenal is an open-source GTM skills library for Claude Code, built by [Saber](https://saber.app). It gives revenue and GTM teams 23 slash commands covering the full outbound motion — from market mapping and ICP extraction to account scoring, personalised outreach, and pipeline review.
+Saber Skills is an open-source GTM skills library for Claude Code, built by [Saber](https://saber.app). It gives revenue and GTM teams 23 slash commands covering the full outbound motion — from market mapping and ICP extraction to account scoring, personalised outreach, and pipeline review.
 
 Most skills work without any special tools. Skills that benefit from the [Saber CLI](https://saber.app) will say so — and every one of them offers a meaningful path without it.
 
@@ -8,7 +8,7 @@ Most skills work without any special tools. Skills that benefit from the [Saber 
 
 ## How it works
 
-Arsenal covers three stages of the GTM motion:
+Saber Skills covers three stages of the GTM motion:
 
 ```
 1. Understand  →  Who is your market? Who is your buyer? What signals matter?
@@ -28,15 +28,15 @@ In Claude Code:
 
 ```
 /plugin marketplace add saberapp/saber-marketplace
-/plugin install saber-arsenal@saber-marketplace
+/plugin install saber-skills@saber-marketplace
 ```
 
-Arsenal activates on the next session start. All available skills are listed in the session header.
+Saber Skills activates on the next session start. All available skills are listed in the session header.
 
 ### Direct URL install (contributors and testers)
 
 ```
-/plugin install --url https://github.com/saberapp/arsenal
+/plugin install --url https://github.com/saberapp/skills
 ```
 
 ---
@@ -113,7 +113,7 @@ Arsenal activates on the next session start. All available skills are listed in 
 ```
 You:     signal-discovery
 
-Arsenal: Loading org context...
+Saber: Loading org context...
          Running extract-icp on saber.app...
 
          ICP — saber.app
@@ -126,7 +126,7 @@ Arsenal: Loading org context...
 
 You:     build-account-list
 
-Arsenal: No Saber CLI detected. What prospecting tools do you have available?
+Saber: No Saber CLI detected. What prospecting tools do you have available?
          → User: Apollo
 
          Searching Apollo: B2B SaaS, 25–500 employees, DACH...
@@ -134,7 +134,7 @@ Arsenal: No Saber CLI detected. What prospecting tools do you have available?
 
 You:     score-accounts
 
-Arsenal: Paste your signal data or describe what you know about these accounts.
+Saber: Paste your signal data or describe what you know about these accounts.
          → User: [pastes Apollo enrichment with funding, hiring, tech stack data]
 
          Scoring 340 accounts using weighted model...
@@ -145,7 +145,7 @@ Arsenal: Paste your signal data or describe what you know about these accounts.
 
 You:     write-outreach   [for Kombo]
 
-Arsenal: Subject: saw you're scaling the sales team at Kombo
+Saber: Subject: saw you're scaling the sales team at Kombo
 
          Hi [Name], noticed Kombo brought on a new CTO last month and is
          actively hiring across the sales team — usually means the GTM motion
