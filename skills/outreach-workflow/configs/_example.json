@@ -1,0 +1,75 @@
+{
+  "sourceDomain": "example.com",
+  "savedAt": "2026-01-01",
+  "icp": {
+    "summary": "One- or two-sentence description of the source company's product and primary buyer.",
+    "targetCompany": {
+      "size": "e.g. 200–2,000 employees, sweet spot 500–1,000",
+      "stage": "e.g. Series B → enterprise",
+      "industries": [
+        "B2B SaaS",
+        "fintech",
+        "vertical SaaS with usage-based pricing"
+      ],
+      "geography": "global; strongest in NL, UK, US"
+    },
+    "buyingCommittee": {
+      "decisionMakers": ["Title 1", "Title 2"],
+      "influencers": ["Title 3", "Title 4"],
+      "endUsers": ["Title 5"]
+    },
+    "painPoints": [
+      "A specific pain in customer language (verbatim quote where possible)",
+      "Another specific pain — describe what the customer LACKED before buying"
+    ],
+    "buyingTriggers": [
+      "A specific event (e.g. 'New CFO hired in last 9 months')",
+      "Another event-shaped trigger (not 'company is growing' — say 'Series B closed in 2026')"
+    ],
+    "namedCustomers": [
+      {
+        "company": "Customer Inc",
+        "industry": "fintech",
+        "size": "~500",
+        "geo": "US"
+      }
+    ]
+  },
+  "contactSearch": {
+    "titles": [
+      "Title 1",
+      "Title 2",
+      "Title 3",
+      "Title 4",
+      "Title 5"
+    ],
+    "keyword": "single fallback keyword string",
+    "rationale": "One sentence — why these titles map to the buying committee. Keyword is used only as fallback when title-only search returns zero (the CLI applies it AND-style with titles, which can over-constrain at small companies)."
+  },
+  "signals": [
+    {
+      "id": 1,
+      "category": "fit",
+      "question": "An exact research question describing WHAT to find, not WHERE to look. Saber picks sources internally.",
+      "answerType": "list",
+      "weight": 3,
+      "interpretation": "Positive when the list contains any of: tag_a, tag_b, tag_c."
+    },
+    {
+      "id": 2,
+      "category": "potential",
+      "question": "A question with an enumerable answer space — list each X the company uses, choosing from these exact tags: tag_one, tag_two, tag_three.",
+      "answerType": "list",
+      "weight": 3,
+      "interpretation": "Positive when the list contains any of: tag_one, tag_two."
+    },
+    {
+      "id": 3,
+      "category": "urgency",
+      "question": "A time-bounded question. In the last X months, has the company done Y? For each instance, return Field1, Field2, Field3, Field4. If none, respond with: No qualifying instances.",
+      "answerType": "open_text",
+      "weight": 2,
+      "interpretation": "Positive when at least one instance is returned."
+    }
+  ]
+}

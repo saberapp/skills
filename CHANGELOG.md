@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.3.0] - 2026-05-07
+
+### Added
+
+- `Guided workflows` category in the README and `SessionStart` hook — end-to-end alternatives to chaining atomic skills.
+- `prospecting-workflow` skill — guided multi-stage workflow (filter → list → signals → contacts → CSV) with a credit-discipline guard and pre-trigger safeguards. Use this when you want one signed-off CSV instead of running `build-account-list` → `create-company-signals` → `build-contact-list` separately.
+- `outreach-workflow` skill — per-prospect guided workflow (signals → contact search → cold email + LinkedIn DM). One-time setup defines the source-company ICP, contact-search targets, and ≤5 weighted signals; every subsequent run reuses them. Configs persist at `~/.saber-skills/outreach-workflow/configs/<source>.json`.
+
 ## [0.2.0] - 2026-05-05
 
 ### Added

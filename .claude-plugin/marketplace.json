@@ -5,6 +5,6 @@
     "url": "https://github.com/saberapp/skills.git"
   },
   "description": "Saber Skills — GTM and RevOps skills for Claude Code, by Saber",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "strict": true
 }
