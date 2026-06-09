@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.4.0] - 2026-06-09
+
+### Added
+
+- `event-prospecting` skill — builds a meeting plan for a conference or event you're attending. Turns an attendee list (from any source — community export, registration CSV, speaker/sponsor list, or a pasted list) into a tiered plan of buyers, peers, and collaborators, grades each person's attendance confidence, drafts per-person outreach from what they actually posted, and produces one self-contained HTML plan. Uses the Saber CLI for email and contact signals when available, with a manual fallback.
+- `Events` category in the README and the `SessionStart` hook listing.
+
 ## [0.3.0] - 2026-05-07
 
 ### Added

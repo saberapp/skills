@@ -1,6 +1,6 @@
 # Saber Skills
 
-Saber Skills is an open-source GTM skills library built by [Saber](https://saber.app). It gives revenue and GTM teams 28 skills covering the full outbound motion — from market mapping and ICP extraction to native fit + urgency scoring, personalised outreach, pipeline review, and end-to-end guided workflows.
+Saber Skills is an open-source GTM skills library built by [Saber](https://saber.app). It gives revenue and GTM teams 29 skills covering the full outbound motion — from market mapping and ICP extraction to native fit + urgency scoring, personalised outreach, pipeline review, event meeting plans, and end-to-end guided workflows.
 
 Works with Claude Code, Cursor, Gemini CLI, and any agent that supports skills. Most skills work without any special tools. Skills that benefit from the [Saber CLI](https://saber.app) will say so — and every one of them offers a meaningful path without it.
 
@@ -126,6 +126,12 @@ Saber Skills activates on the next session start. All available skills are liste
 |---|---|
 | `import-from-hubspot` | Pulls a HubSpot company list, view, or segment into Saber as a target account or contact list. |
 | `sync-to-hubspot` | Pushes Saber signal results back to HubSpot as contact or company properties. |
+
+### Events
+
+| Skill | What it does |
+|---|---|
+| `event-prospecting` | Builds a meeting plan for a conference or event you're attending. Turns an attendee list into a tiered plan — buyers, peers, and collaborators — with per-person outreach drawn from what each attendee actually posted, and one self-contained plan you walk in with. |
 
 ---
 

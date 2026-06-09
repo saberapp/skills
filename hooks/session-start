@@ -78,6 +78,9 @@ echo "  CRM"
 echo "  - import-from-hubspot       — pull a HubSpot list into Saber"
 echo "  - sync-to-hubspot           — push signal results back to HubSpot as CRM properties"
 echo ""
+echo "  Events"
+echo "  - event-prospecting         — build a meeting plan for a conference you're attending: tier attendees, draft outreach, ship one plan"
+echo ""
 echo "Skills that use the Saber CLI will check if it is installed and offer a fallback path if not."
 
 # ── Update notification ───────────────────────────────────────────────────────
