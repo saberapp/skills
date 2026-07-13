@@ -35,7 +35,39 @@ saber list company list
 
 ---
 
-### Path A — Saber CLI (full list, subscription mode)
+### Path A — Saber CLI
+
+**Signal Library first**
+
+Five prebuilt signals run by key — no question, no answer type, no interpretation rules:
+`funding`, `mna`, `tech`, `open-jobs`, `firmographics`. If a signal in the set is covered by
+one of these keys, run the library signal rather than a hand-written question — the answers
+are evidence-cited and stable across runs.
+
+```bash
+saber signal funding --domain acme.com
+saber signal mna --domain acme.com
+saber signal open-jobs --domain acme.com
+saber signal firmographics --domain acme.com
+saber signal tech --domain acme.com --category crm
+saber signal tech --domain acme.com --technology "salesforce"
+```
+
+`tech` takes exactly one of `--category erp|crm` or `--technology "<name>"`. An unrecognised
+`--technology` returns a 422 with did-you-mean suggestions — re-run with a suggested name.
+
+Library signals run per domain. To cover a list, run one command per company (use `--no-wait`
+to fire them in parallel and collect with `saber signal get <signalId>`):
+
+```bash
+saber signal funding --domain acme.com --no-wait
+saber signal get <signalId>
+```
+
+Everything the library doesn't cover — your pain points, your triggers, your disqualifiers —
+stays a custom signal. Most sets mix both.
+
+**Custom signals — subscription mode (full list, scheduled)**
 
 **Option 1 — Run once (recommended for getting started)**
 ```bash
@@ -59,7 +91,7 @@ saber subscription create \
   --frequency weekly
 ```
 
-Create one subscription per signal question.
+Create one subscription per custom signal question.
 
 **Spot-check a single company**
 ```bash
@@ -120,6 +152,12 @@ After reviewing results, use `score-accounts` to rank the full list.
 ## Key Saber commands
 
 ```bash
+saber signal funding --domain <domain> [--no-wait] [--force-refresh]
+saber signal mna --domain <domain>
+saber signal tech --domain <domain> --category <erp|crm>
+saber signal tech --domain <domain> --technology "<name>"
+saber signal open-jobs --domain <domain>
+saber signal firmographics --domain <domain>
 saber subscription create --list <listId> --name "<name>" --question "<question>" [--answer-type] [--frequency] [--run-once]
 saber subscription trigger <subscriptionId>
 saber subscription get <subscriptionId>

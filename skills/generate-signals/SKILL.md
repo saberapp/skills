@@ -35,6 +35,36 @@ When generating signals, look for companies that *currently have the problem* �
 | "Reporting takes days to produce" | Companies using spreadsheets for reporting |
 | "Rapid headcount growth overwhelming ops" | Companies with 30%+ headcount growth in 12 months |
 
+## The Signal Library — use it where it fits
+
+Saber ships five prebuilt **Signal Library** signals. They are curated, evidence-cited
+research signals with stable answers — run by key, no question design needed:
+
+| Library key | Covers |
+|---|---|
+| `funding` | Funding history and recent rounds |
+| `mna` | M&A activity — as acquirer or as target |
+| `tech` | Technology stack, by category (`erp`, `crm`) or by named product |
+| `open-jobs` | Open roles and hiring activity |
+| `firmographics` | Size, HQ, industry, and other company fundamentals |
+
+**When a signal you're about to write matches a library key, use the library signal instead
+of a hand-written question.** It is evidence-cited, stable across runs, and needs no
+interpretation tuning. Mark it in the output as `LibraryKey: <key>` in place of `Question:`.
+
+The library is not a preset layer on top of custom signals — it's the shortest path to the
+signals most teams need first. Everything it doesn't cover is exactly what custom signals
+are for: your pain points, your triggers, your product's disqualifiers. A good signal set
+usually mixes both.
+
+```
+Signal 3 — icp_fit
+  LibraryKey:  tech
+  TechFilter:  --category crm
+  DerivedFrom: icp_constraint
+  ...
+```
+
 ## Signal categories
 
 Generate signals across three categories:
@@ -59,7 +89,8 @@ Tests whether the company shows evidence of the pain point.
 
 ## Signal format
 
-Output each signal in this format:
+Output each signal in this format (use `LibraryKey` instead of `Question` when a
+Signal Library key covers the signal — see above):
 
 ```
 Signal {N} — {category}
@@ -132,7 +163,16 @@ Once signals are run against a prospect:
 
 ## Saber CLI — activating signals
 
-Once the signal set is approved, use `create-company-signals` to activate them in Saber:
+Once the signal set is approved, use `create-company-signals` to activate them in Saber.
+
+Library signals run by key against a domain:
+
+```bash
+saber signal funding --domain acme.com
+saber signal tech --domain acme.com --category crm
+```
+
+Custom signals run as scheduled subscriptions against a list:
 
 ```bash
 saber subscription create \
@@ -143,7 +183,7 @@ saber subscription create \
   --frequency weekly
 ```
 
-Run one `subscription create` command per signal. The signal metadata (weight, category, interpretation rules) should be kept in conversation context — both `configure-scoring` (to materialize the model into native scoring rules) and `score-accounts` (when falling back to client-side ranking) consume it.
+Run one `subscription create` command per custom signal. The signal metadata (weight, category, interpretation rules) should be kept in conversation context — both `configure-scoring` (to materialize the model into native scoring rules) and `score-accounts` (when falling back to client-side ranking) consume it.
 
 ## Materializing the model with native scoring
 
@@ -163,6 +203,7 @@ Default point values: `points = weight × 10`. Disqualifiers go in `fit` with st
 
 Before finalising:
 
+- [ ] No hand-written question duplicates a Signal Library key (`funding`, `mna`, `tech`, `open-jobs`, `firmographics`) — use the library signal instead
 - [ ] Every urgency signal has an explicit time bound ("in the last 6 months" — not "recently" or "ever")
 - [ ] No `buying_signal` has `isDisqualifier: true`
 - [ ] No `urgency` signal has `isDisqualifier: true`
