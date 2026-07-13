@@ -21,7 +21,7 @@ Ask the user for the company name or domain if not already in conversation conte
 
 Check what research tools are available:
 
-**Saber CLI** (`saber --help`): runs signals against the domain for structured data. Prefer the prebuilt **Signal Library** signals — `saber signal funding|mna|tech|open-jobs|firmographics --domain <domain>` — which return structured, source-cited answers with no question design needed. Fall back to a custom `--question` only for a fact no library signal covers.
+**Saber CLI** (`saber --help`): runs signals against the domain for structured data. Prefer the **prebuilt signals** — `saber signal funding|mna|tech|open-jobs|firmographics --domain <domain>` — which return structured, source-cited answers with no question design needed. Fall back to a custom `--question` only for a fact no prebuilt signal covers.
 
 **MCP tools**: scan available tools for:
 - Web search (Brave, Perplexity, Tavily, or similar)
@@ -63,7 +63,7 @@ If a LinkedIn MCP is available, look up the company page:
 - Key decision-makers and their recent activity
 
 ### Saber signal results
-If the Saber CLI is available, the prebuilt Signal Library signals above are the fastest way to get structured, source-cited data for this domain. Each consumes credits — check the balance first (`saber credits`), then fire them in parallel and collect:
+If the Saber CLI is available, the prebuilt signals above are the fastest way to get structured, source-cited data for this domain. Each consumes credits — check the balance first (`saber credits`), then fire them in parallel and collect:
 
 ```bash
 saber signal funding       --domain <domain> --no-wait
@@ -74,7 +74,7 @@ saber signal tech          --domain <domain> --category crm --no-wait
 saber signal get <signalId>   # for each returned id, once complete
 ```
 
-For a fact no library signal covers, run a custom question: `saber signal --domain <domain> --question "<question>" --answer-type boolean`.
+For a fact no prebuilt signal covers, run a custom question: `saber signal --domain <domain> --question "<question>" --answer-type boolean`.
 
 If pre-defined signal subscriptions exist for a list containing this company, retrieve those results:
 ```bash

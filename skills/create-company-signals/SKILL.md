@@ -37,11 +37,11 @@ saber list company list
 
 ### Path A — Saber CLI
 
-**Signal Library first**
+**Prebuilt signals first**
 
 Five prebuilt signals run by key — no question, no answer type, no interpretation rules:
 `funding`, `mna`, `tech`, `open-jobs`, `firmographics`. If a signal in the set is covered by
-one of these keys, run the library signal rather than a hand-written question — the answers
+one of these keys, run the prebuilt signal rather than a hand-written question — the answers
 are evidence-cited and stable across runs.
 
 ```bash
@@ -56,7 +56,7 @@ saber signal tech --domain acme.com --technology "salesforce"
 `tech` takes exactly one of `--category erp|crm` or `--technology "<name>"`. An unrecognised
 `--technology` returns a 422 with did-you-mean suggestions — re-run with a suggested name.
 
-Library signals run per domain. To cover a list, run one command per company (use `--no-wait`
+Prebuilt signals run per domain. To cover a list, run one command per company (use `--no-wait`
 to fire them in parallel and collect with `saber signal get <signalId>`):
 
 ```bash
@@ -64,7 +64,7 @@ saber signal funding --domain acme.com --no-wait
 saber signal get <signalId>
 ```
 
-Everything the library doesn't cover — your pain points, your triggers, your disqualifiers —
+Everything the prebuilt signals do not cover — your pain points, your triggers, your disqualifiers —
 stays a custom signal. Most sets mix both.
 
 **Custom signals — subscription mode (full list, scheduled)**
