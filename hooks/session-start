@@ -50,7 +50,7 @@ echo "  - build-contact-list        — build a target contact list (Saber, Apol
 echo "  - enrich-contacts           — find email and phone via Apollo, Cognism, and others"
 echo ""
 echo "  Research and qualification"
-echo "  - research-account          — full account brief; prebuilt signals (funding, mna, tech, open-jobs, firmographics) + web search + CRM"
+echo "  - research-account          — full account brief; signals (5 prebuilt keys + custom) + web search + CRM"
 echo "  - qualify-inbound           — qualify an inbound lead by native fit + urgency, with manual fallback"
 echo ""
 echo "  Scoring and prioritisation"

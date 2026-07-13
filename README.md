@@ -84,7 +84,7 @@ Saber Skills activates on the next session start. All available skills are liste
 
 | Skill | What it does |
 |---|---|
-| `research-account` | Builds a full account brief — hiring, funding, M&A, tech stack, and firmographics, plus a call-prep summary — using the **prebuilt signals** (`saber signal funding\|mna\|tech\|open-jobs\|firmographics --domain <d>`). |
+| `research-account` | Builds a full account brief — hiring, funding, M&A, tech stack, and firmographics, plus a call-prep summary — using the **prebuilt signals** (`saber signal funding\|mna\|tech\|open-jobs\|firmographics --domain <d>`), plus custom signals for anything they don't cover. |
 | `qualify-inbound` | Qualifies an inbound lead from native fit + urgency scores when Saber is available; falls back to manual scoring otherwise. |
 
 ### Scoring and prioritisation
