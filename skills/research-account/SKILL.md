@@ -21,7 +21,7 @@ Ask the user for the company name or domain if not already in conversation conte
 
 Check what research tools are available:
 
-**Saber CLI** (`saber --help`): runs signals against the domain for structured data. Prefer the **prebuilt signals** — `saber signal funding|mna|tech|open-jobs|firmographics --domain <domain>` — which return structured, source-cited answers with no question design needed. Fall back to a custom `--question` only for a fact no prebuilt signal covers.
+**Saber CLI** (`saber --help`): runs signals against the domain for structured data. An account brief is mostly commodity facts, which is exactly what the five **prebuilt signals** return — `saber signal funding|mna|tech|open-jobs|firmographics --domain <domain>`, structured and source-cited, no question design needed. For anything the brief needs that isn't one of those five facts — a product capability, a specific hiring pattern, a qualification judgement — write a custom `--question`.
 
 **MCP tools**: scan available tools for:
 - Web search (Brave, Perplexity, Tavily, or similar)

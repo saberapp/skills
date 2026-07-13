@@ -37,12 +37,16 @@ saber list company list
 
 ### Path A — Saber CLI
 
-**Prebuilt signals first**
+**Run the signals the set actually calls for — some are prebuilt, most are custom**
+
+Take the signal set as designed (`generate-signals`) and activate each signal in the shape it
+needs. Do not reshape a signal to fit a prebuilt key, and do not swap a custom signal for a
+prebuilt one that is merely adjacent — the qualification criteria are the point.
 
 Five prebuilt signals run by key — no question, no answer type, no interpretation rules:
-`funding`, `mna`, `tech`, `open-jobs`, `firmographics`. If a signal in the set is covered by
-one of these keys, run the prebuilt signal rather than a hand-written question — the answers
-are evidence-cited and stable across runs.
+`funding`, `mna`, `tech`, `open-jobs`, `firmographics`. Use one **only when the signal in the
+set is exactly that commodity fact**, with no threshold, window, filter or judgement attached.
+Everything else — which is most of a good set — is a custom signal.
 
 ```bash
 saber signal funding --domain acme.com
