@@ -21,6 +21,8 @@ Provide the ICP output from `extract-icp`, including:
 - Target company profile (size, industry, stage)
 - Optional: targeting context (e.g. "focus on NetSuite users")
 
+Apply `design-signals` to every custom definition. Keep prebuilt signal selection in this skill.
+
 ## The core insight: inverse pain points
 
 > **Pain points describe what customers LACKED before buying.**
@@ -115,7 +117,7 @@ prebuilt signal key covers the signal — see above):
 ```
 Signal {N} — {category}
   Question:    {the exact research question to ask about a prospect company}
-  AnswerType:  {boolean | number | open_text}
+  AnswerType:  {boolean | number | percentage | currency | list | open_text}
   DerivedFrom: {pain_point | buying_trigger | icp_constraint}
   SourceText:  {the exact pain point or trigger this is based on}
   Rationale:   {why this signal identifies a good prospect}
@@ -124,9 +126,13 @@ Signal {N} — {category}
     [For boolean]
       positiveAnswer:   true / false   (which answer indicates a fit?)
 
-    [For number]
+    [For number, percentage, or currency]
       numberRange:      { min: X, max: Y }
       higherIsBetter:   true / false   (if outside range, which direction is better?)
+
+    [For list]
+      positiveValues:   ["value1", "value2", ...]
+      negativeValues:   ["value3", "value4", ...]
 
     [For open_text]
       positiveKeywords: ["word1", "word2", ...]
@@ -231,6 +237,7 @@ Before finalising:
 - [ ] No `urgency` signal has `isDisqualifier: true`
 - [ ] At most 2–3 signals have `weight: 3` (reserve for truly critical signals)
 - [ ] Each signal maps back to a specific pain point, trigger, or ICP constraint
+- [ ] Every custom definition passes the `design-signals` completion criteria
 - [ ] `open_text` signals have both `positiveKeywords` and `negativeKeywords` defined
 - [ ] The signal set covers all three categories: `icp_fit`, `urgency`, `buying_signal`
 - [ ] At least one signal uses the inverse pain point framing (looking for absence of a capability)

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Design Signals"
+  short_description: "Design clear, automation-ready Saber signals"
+  default_prompt: "Use $design-signals to turn my business question into a clear Saber signal definition."

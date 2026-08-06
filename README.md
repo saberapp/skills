@@ -1,6 +1,6 @@
 # Saber Skills
 
-Saber Skills is an open-source GTM skills library built by [Saber](https://saber.app). It gives revenue and GTM teams 28 skills covering the full outbound motion — from market mapping and ICP extraction to native fit + urgency scoring, personalised outreach, pipeline review, and end-to-end guided workflows.
+Saber Skills is an open-source GTM skills library built by [Saber](https://saber.app). It gives revenue and GTM teams 29 skills covering the full outbound motion, from market mapping and ICP extraction to native fit + urgency scoring, personalised outreach, pipeline review, and end-to-end guided workflows.
 
 Works with Claude Code, Cursor, Gemini CLI, and any agent that supports skills. Most skills work without any special tools. Skills that benefit from the [Saber CLI](https://saber.app) will say so — and every one of them offers a meaningful path without it.
 
@@ -55,6 +55,7 @@ Saber Skills activates on the next session start. All available skills are liste
 |---|---|
 | `signal-discovery` | Guided entry point — loads org context, runs `extract-icp` then `generate-signals` in sequence. Start here. |
 | `extract-icp` | Researches a company domain and extracts a structured ICP: target profile, buying committee, pain points, buying triggers. |
+| `design-signals` | Turns a business need into focused, creation-ready signal or enrichment definitions, including portable JSON Schemas. |
 | `generate-signals` | Turns a structured ICP into 12–15 weighted research signals with scoring rules across `icp_fit`, `urgency`, and `buying_signal` categories. |
 
 ### Guided workflows

@@ -20,7 +20,7 @@ Before doing anything else, check if the Saber CLI is installed by running `sabe
 
 ## Prerequisites
 
-- Approved contact signal definitions are available in conversation context (run `signal-discovery` first if not)
+- Approved contact signal definitions are available in conversation context (run `design-signals` first if not)
 - Saber CLI is available (`saber --help` works)
 
 ## Before running signals
@@ -70,8 +70,10 @@ Ask the user which contacts they want to prioritise. You'll need LinkedIn profil
 For each contact and each approved signal question:
 
 ```bash
-saber signal --profile <linkedin-url> --question "<question>" --answer-type boolean
+saber signal --profile <linkedin-url> --question "<question>" --answer-type <answerType>
 ```
+
+For `json_schema`, also pass `--output-schema @schema.json` or inline JSON.
 
 ### Step 3 — Review and prioritise
 

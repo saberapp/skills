@@ -23,7 +23,7 @@ Tell the user: "Running [N] signals against [M] companies will use [N×M] credit
 ## Step 1 — Confirm signals and list
 
 From conversation context, confirm:
-- The approved signal questions to activate (from `generate-signals` or `signal-discovery`)
+- The approved signal definitions to activate (from `design-signals`, `generate-signals`, or `signal-discovery`)
 - The account list to run them against
 
 To find a list ID:
@@ -79,7 +79,7 @@ saber subscription create \
   --list <listId> \
   --name "<signal name>" \
   --question "<signal question>" \
-  --answer-type boolean \
+  --answer-type <answerType> \
   --frequency monthly \
   --run-once
 ```
@@ -91,16 +91,18 @@ saber subscription create \
   --list <listId> \
   --name "<signal name>" \
   --question "<signal question>" \
-  --answer-type boolean \
+  --answer-type <answerType> \
   --frequency weekly
 ```
 
-Create one subscription per custom signal question.
+Create one subscription per custom signal definition. For `json_schema`, also pass the approved schema as `--output-schema @schema.json` or as inline JSON.
 
 **Spot-check a single company**
 ```bash
-saber signal --domain <domain> --question "<question>" --answer-type boolean
+saber signal --domain <domain> --question "<question>" --answer-type <answerType>
 ```
+
+For `json_schema`, also pass `--output-schema @schema.json` or inline JSON.
 
 Use `--no-wait` to fire multiple signals in parallel:
 ```bash
