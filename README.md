@@ -2,7 +2,7 @@
 
 Saber Skills is an open-source GTM skills library built by [Saber](https://saber.app). It gives revenue and GTM teams 29 skills covering the full outbound motion, from market mapping and ICP extraction to native fit + urgency scoring, personalised outreach, pipeline review, and end-to-end guided workflows.
 
-Works with Claude Code, Cursor, Gemini CLI, and any agent that supports skills. Most skills work without any special tools. Skills that benefit from the [Saber CLI](https://saber.app) will say so — and every one of them offers a meaningful path without it.
+Works with Codex, Claude Code, Cursor, Gemini CLI, and any agent that supports skills. Most skills work without any special tools. Skills that benefit from the [Saber CLI](https://saber.app) will say so — and every one of them offers a meaningful path without it.
 
 ---
 
@@ -28,7 +28,33 @@ Each skill is a focused prompt that guides your agent through a structured workf
 npx skills add saberapp/skills
 ```
 
-Works with Claude Code, Cursor, Gemini CLI, GitHub Copilot, and [40+ other agents](https://skills.sh).
+Works with Codex, Claude Code, Cursor, Gemini CLI, GitHub Copilot, and [40+ other agents](https://skills.sh).
+
+### Via Codex
+
+Saber can be installed in Codex as a local plugin. This repository includes both the Codex plugin manifest at `.codex-plugin/plugin.json` and a local marketplace definition at `.agents/plugins/marketplace.json`.
+
+To install Saber in Codex from this checkout, point Codex at the repository as a local marketplace and enable the plugin:
+
+```toml
+[marketplaces.saber-local]
+source_type = "local"
+source = "/absolute/path/to/skills"
+
+[plugins."saber@saber-local"]
+enabled = true
+```
+
+Restart Codex after editing `~/.codex/config.toml`, then install or enable Saber from the plugin marketplace UI.
+
+Alternatively, to mirror Codex's bundled marketplace layout, symlink this repository under `~/plugins/saber` and use `~/.agents/plugins/marketplace.json` as the marketplace file:
+
+```bash
+mkdir -p ~/plugins ~/.agents/plugins
+ln -sfn /absolute/path/to/skills ~/plugins/saber
+```
+
+The Codex plugin currently exposes the `skills/` library. Skills that benefit from the Saber CLI will detect `saber` on your `PATH` and provide a fallback workflow when it is not installed or authenticated.
 
 ### Via the Saber Marketplace (Claude Code)
 
@@ -184,7 +210,7 @@ Saber: Subject: saw you're scaling the sales team at Kombo
 
 ## The Saber CLI
 
-Most skills work without the Saber CLI. The CLI unlocks:
+The Codex and Claude plugins both use the same `skills/` library. Most skills work without the Saber CLI. The CLI unlocks:
 
 - **Automated signal runs** — run research questions across hundreds of accounts on a schedule
 - **Contact-level signals** — research individuals by LinkedIn URL

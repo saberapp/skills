@@ -1,0 +1,46 @@
+{
+  "name": "saber",
+  "version": "0.1.0",
+  "description": "Saber GTM intelligence skills for Codex: signals, account research, list building, scoring, and outreach.",
+  "author": {
+    "name": "Saber",
+    "email": "hello@saber.app",
+    "url": "https://saber.app"
+  },
+  "homepage": "https://github.com/saberapp/skills",
+  "repository": "https://github.com/saberapp/skills",
+  "license": "MIT",
+  "keywords": [
+    "saber",
+    "gtm",
+    "revops",
+    "sales",
+    "signals",
+    "prospecting",
+    "outreach"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Saber",
+    "shortDescription": "GTM intelligence, signals, account research, and outreach workflows.",
+    "longDescription": "Saber brings GTM and RevOps workflows into Codex with skills for signal discovery, ICP extraction, account and contact list building, account scoring, research, outreach, pipeline review, and CRM handoff. Skills work with pasted context or connected tools, and use the Saber CLI when it is installed and authenticated.",
+    "developerName": "Saber",
+    "category": "Productivity",
+    "capabilities": [
+      "Interactive",
+      "Research",
+      "Write"
+    ],
+    "websiteURL": "https://saber.app",
+    "privacyPolicyURL": "https://www.saber.app/legal/privacy-policy",
+    "termsOfServiceURL": "https://www.saber.app/legal/terms-of-service",
+    "defaultPrompt": [
+      "Define my ICP and buying signals.",
+      "Research and score these accounts.",
+      "Write outreach from account signals."
+    ],
+    "brandColor": "#FBBD05",
+    "composerIcon": "./assets/icon.png",
+    "logo": "./assets/icon.png"
+  }
+}
